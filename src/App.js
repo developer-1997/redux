@@ -1,15 +1,24 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router , Routes , Route} from "react-router-dom"
 import './App.css';
-import { Provider } from 'react-redux';
-import store from './store/store';
-import Counter from './Counter';
+import { AdminAuthMiddleware , StudentAuthMiddleware } from "./routes/route";
+import { adminRoutes , publicRoutes , studentRoutes } from "./routes";
+import PublicDashbord from "./pages/public/Dashbord";
+
 function App() {
   return (
-    <Provider store={store}>
-    <div className="App">
-      <Counter />
-    </div>
-    </Provider>
+    
+    <Router>
+      <Routes>
+        {
+          adminRoutes.map((admin) => (
+            <Route path="/admin/dashbord"  element={<AdminAuthMiddleware >{admin.component}</AdminAuthMiddleware>} />
+          ))
+        }
+
+<Route path="/login"  element={<PublicDashbord />} />
+      </Routes>
+    </Router>
+   
   );
 }
 
