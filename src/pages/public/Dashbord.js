@@ -3,7 +3,7 @@
 const PublicDashbord = () => {
     return (
         <div>
-            Admin PublicDashbord
+             PublicDashbord
         </div>
     )
 }

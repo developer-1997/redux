@@ -1,21 +1,20 @@
 import { BrowserRouter as Router , Routes , Route} from "react-router-dom"
 import './App.css';
-import { AdminAuthMiddleware , StudentAuthMiddleware } from "./routes/route";
-import { adminRoutes , publicRoutes , studentRoutes } from "./routes";
 import PublicDashbord from "./pages/public/Dashbord";
+import React , {lazy , Suspense} from "react";
+const AdminDashbord =  lazy(() => import("./pages/admin/Dashbord"));
 
 function App() {
   return (
     
     <Router>
       <Routes>
-        {
-          adminRoutes.map((admin) => (
-            <Route path="/admin/dashbord"  element={<AdminAuthMiddleware >{admin.component}</AdminAuthMiddleware>} />
-          ))
-        }
-
-<Route path="/login"  element={<PublicDashbord />} />
+        <Route path="/"  element={<PublicDashbord />} />
+        <Route path="/admin"  element={
+          <Suspense  fallback={<><h1>asdfghjklrtyuifghjkrtyuklcvbhnj</h1></>}>
+            <AdminDashbord />
+          </Suspense>
+        } />
       </Routes>
     </Router>
    
